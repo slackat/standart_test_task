@@ -1,0 +1,36 @@
+body {
+    background-color: #f8f9fa;
+    color: #495057;
+}
+
+.container {
+    margin-top: 50px;
+}
+
+h1 {
+    color: #007bff;
+}
+
+table {
+    background-color: #ffffff;
+    border-collapse: collapse;
+    width: 100%;
+}
+
+th,
+td {
+    border: 1px solid #dee2e6;
+    padding: 8px;
+    text-align: left;
+}
+
+th {
+    background-color: #007bff;
+    color: #ffffff;
+}
+
+.mainpage-btn, .requisites-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}

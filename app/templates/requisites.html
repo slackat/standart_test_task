@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заявок на оплату</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <a href="/" class="btn btn-primary mainpage-btn">Перейти к главной странице</a>
+    <h1>Список реквизитов</h1>
+
+    <form method="get" action="{{ url_for('app_routes.requisites') }}">
+        <label for="search">Search:</label>
+        <input type="text" name="search" value="{{ search_term }}">
+
+        <label for="search_field">Поле для поиска:</label>
+        <select name="search_field">
+            <option value="payment_type">Тип оплаты</option>
+            <option value="account_type">Тип аккаунта</option>
+            <option value="owner_name">ФИО</option>
+            <option value="phone_number">Номер телефона</option>
+            <option value="value_limit">Лимит</option>
+        </select>
+
+        <button type="submit">Поиск</button>
+    </form>
+
+    <table>
+        <thead>
+            <tr>
+                <th><a
+                        href="?sort=id&order={{ 'desc' if column_to_sort == 'id' and order_by == 'asc' else 'asc' }}">ID</a>
+                </th>
+                <th><a
+                        href="?sort=payment_type&order={{ 'desc' if column_to_sort == 'payment_type' and order_by == 'asc' else 'asc' }}">Тип
+                        платежа</a></th>
+                <th><a
+                        href="?sort=account_type&order={{ 'desc' if column_to_sort == 'account_type' and order_by == 'asc' else 'asc' }}">Тип
+                        аккаунта</a></th>
+                <th><a
+                        href="?sort=owner_name&order={{ 'desc' if column_to_sort == 'owner_name' and order_by == 'asc' else 'asc' }}">ФИО</a>
+                </th>
+                <th><a
+                        href="?sort=phone_number&order={{ 'desc' if column_to_sort == 'phone_number' and order_by == 'asc' else 'asc' }}">Номер
+                        телефона</a></th>
+                <th><a
+                        href="?sort=value_limit&order={{ 'desc' if column_to_sort == 'value_limit' and order_by == 'asc' else 'asc' }}">Лимит</a>
+                </th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for requisite in requisites %}
+            <tr>
+                <td>{{ requisite.id }}</td>
+                <td>{{ requisite.payment_type }}</td>
+                <td>{{ requisite.account_type }}</td>
+                <td>{{ requisite.owner_name }}</td>
+                <td>{{ requisite.phone_number }}</td>
+                <td>{{ requisite.value_limit }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+
+</html>

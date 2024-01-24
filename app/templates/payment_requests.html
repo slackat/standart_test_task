@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Список заявок на оплату</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+</head>
+
+<body>
+    <a href="/requisites" class="btn btn-primary requisites-btn">Перейти к странице с реквизитами</a>
+    <h1>Список заявок на оплату</h1>
+    <table>
+        <tr>
+            <th>ID заявки</th>
+            <th>Сумма</th>
+            <th>Тип оплаты</th>
+            <th>Тип аккаунта</th>
+            <th>ФИО</th>
+            <th>Номер телефона</th>
+            <th>Лимит</th>
+            <th>Статус</th>
+        </tr>
+        {% for row in data %}
+        <tr>
+            <td>{{ row['ID заявки'] }}</td>
+            <td>{{ row['Сумма'] }}</td>
+            <td>{{ row['Тип оплаты'] }}</td>
+            <td>{{ row['Тип аккаунта'] }}</td>
+            <td>{{ row['Имя'] }}</td>
+            <td>{{ row['Номер телефона'] }}</td>
+            <td>{{ row['Лимит'] }}</td>
+            <td>{{ row['Статус'] }}</td>
+        </tr>
+        {% endfor %}
+    </table>
+</body>
+
+</html>
