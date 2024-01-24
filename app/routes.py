@@ -36,13 +36,11 @@ def payment_requests():
 @app_routes.route('/requisites')
 def requisites():
     column_to_sort = request.args.get('sort', 'id')
-    order_by = request.args.get('order', 'asc')  # Default to ascending order
+    order_by = request.args.get('order', 'asc')
 
-    # Добавляем поиск по выбранному полю
     search_term = request.args.get('search', '')
-    search_field = request.args.get('search_field', 'payment_type')  # Default to payment_type if not provided
+    search_field = request.args.get('search_field', 'payment_type')
 
-    # Переменная-словарь для соответствия поля в модели полю в запросе
     field_mapping = {
         'payment_type': Requisites.payment_type,
         'account_type': Requisites.account_type,
