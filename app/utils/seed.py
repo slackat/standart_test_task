@@ -1,3 +1,7 @@
+"""
+File for database seeding
+"""
+
 from faker import Faker
 import random
 from models import Requisites, PaymentRequests
@@ -13,7 +17,7 @@ def seed_database():
         db.drop_all()
         db.create_all()
 
-        # Заполнение таблицы Requisites
+        # Seeding requisites table
         for payment_id in PAYMENT_WITH_REQUISITES:
             requisites = Requisites(
                 id = payment_id,
@@ -27,7 +31,7 @@ def seed_database():
 
         db.session.commit()
 
-        # Заполнение таблицы Requests
+        # Seeding requests table
         for payment_id in range(1, 5000):
             if payment_id in PAYMENT_WITH_REQUISITES:
                 request = PaymentRequests(

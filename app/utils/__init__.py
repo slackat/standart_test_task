@@ -1,11 +1,15 @@
+"""
+Project initialise file
+"""
+
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 from dotenv import load_dotenv
 import os
-load_dotenv()
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 
+load_dotenv()
 POSTGRES_LOGIN = os.getenv('POSTGRES_LOGIN')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 POSTGRES_ADDRESS = os.getenv('POSTGRES_ADDRESS')
