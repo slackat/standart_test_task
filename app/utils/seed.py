@@ -4,8 +4,8 @@ File for database seeding
 
 from faker import Faker
 import random
-from models import Requisites, PaymentRequests
-from . import app, db
+from models import Requisites, PaymentRequests, User
+from . import app, db, bcrypt
 
 fake = Faker()
 
@@ -46,5 +46,15 @@ def seed_database():
                     status=random.choice(['waiting_payment', 'canceled']),
                 )
             db.session.add(request)
+        
+        db.session.commit()
+
+        # Seeding user table
+        admin = User(
+            username = 'admin',
+            password = bcrypt.generate_password_hash('password').decode('utf-8'),
+            user_role = 'admin'
+        )
+        db.session.add(admin)
 
         db.session.commit()
