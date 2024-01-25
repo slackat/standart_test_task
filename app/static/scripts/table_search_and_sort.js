@@ -35,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
         const tbody = requisitesTable.querySelector('tbody');
         tbody.innerHTML = '';
         data.forEach(requisite => {
-            let row = '<tr>' +
+            const row = '<tr>' +
                 '<td>' + requisite.id + '</td>' +
                 '<td>' + requisite.payment_type + '</td>' +
                 '<td>' + requisite.account_type + '</td>' +

@@ -53,21 +53,16 @@ def payment_requests():
                                                                      PaymentRequests.id == Requisites.id
                                                                      ).all()
 
-    data = {}
-
-    for payment_request, requisite in joined_data:
-        data[payment_request.id] = {
-            'ID заявки': payment_request.id,
-            'Сумма': payment_request.amount,
-            'Статус': payment_request.status,
-            'Тип оплаты': requisite.payment_type if requisite else '',
-            'Тип аккаунта': requisite.account_type if requisite else '',
-            'Имя': requisite.owner_name if requisite else '',
-            'Номер телефона': requisite.phone_number if requisite else '',
-            'Лимит': requisite.value_limit if requisite else ''
-        }
-
-    table_data = list(data.values())
+    table_data = [{'id': payment_request.id,
+                   'amount': payment_request.amount,
+                   'status': payment_request.status,
+                   'payment_type': getattr(requisite, 'payment_type', ''),
+                   'account_type': getattr(requisite, 'account_type', ''),
+                   'owner_name': getattr(requisite, 'owner_name', ''),
+                   'phone_number': getattr(requisite, 'phone_number', ''),
+                   'value_limit': getattr(requisite, 'value_limit', '')
+                   }
+                   for payment_request, requisite in joined_data]
 
     return render_template('payment_requests.html', data=table_data)
 
@@ -111,7 +106,7 @@ def get_requisites():
             or_(*filters)).order_by(db.text(f"{column_to_sort} {order_by}")).all()
     else:
         # In case empty search field for show all data
-        requisites = Requisites.query.all()
+        requisites = Requisites.query.order_by(db.text(f"{column_to_sort} {order_by}")).all()
 
     requisites_data = [{'id': req.id, 'payment_type': req.payment_type, 'account_type': req.account_type,
                         'owner_name': req.owner_name, 'phone_number': req.phone_number, 'value_limit': req.value_limit}

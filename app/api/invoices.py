@@ -13,7 +13,7 @@ class CreateInvoice(Resource):
         if not (payment_type and limit):
             return {'message': 'Payment type and limit are required.'}, 400
 
-        requisites = Requisites.query.filter(Requisites.payment_type == payment_type, Requisites.value_limit == limit).first()
+        requisites = Requisites.query.filter(Requisites.payment_type == payment_type, Requisites.value_limit == limit).one()
 
         if requisites:
             return {'id': requisites.id,
@@ -29,7 +29,7 @@ class GetInvoiceStatus(Resource):
         if not payment_id:
             return {'message': 'ID is required.'}, 400
         
-        payment = PaymentRequests.query.filter(PaymentRequests.id == payment_id).first()
+        payment = PaymentRequests.query.filter(PaymentRequests.id == payment_id).one()
 
         if payment:
             return {'invoice_status': payment.status}, 200

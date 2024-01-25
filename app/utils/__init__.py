@@ -9,12 +9,14 @@ import os
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
 from flask_swagger_ui import get_swaggerui_blueprint
+load_dotenv()
+ADMIN_PASSWORD_FOR_REQUISITES = os.getenv('ADMIN_PASSWORD_FOR_REQUISITES')
 
 """
 Configuring Flask app
 """
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
-app.config['SECRET_KEY'] = 'secret_key'
+app.config['SECRET_KEY'] = os.getenv('FLASK_APP_SECRET_KEY')
 app.config['TESTING'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = 60*60*24*30
 
@@ -35,7 +37,6 @@ swaggerui_blueprint = get_swaggerui_blueprint(
 """
 Configuring database connection
 """
-load_dotenv()
 POSTGRES_LOGIN = os.getenv('POSTGRES_LOGIN')
 POSTGRES_PASSWORD = os.getenv('POSTGRES_PASSWORD')
 POSTGRES_ADDRESS = os.getenv('POSTGRES_ADDRESS')
