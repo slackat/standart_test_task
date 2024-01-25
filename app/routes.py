@@ -16,12 +16,12 @@ def load_user(user_id):
 
 class LoginForm(FlaskForm):
     username = StringField(validators=[
-                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Username"})
+                           InputRequired(), Length(min=4, max=20)], render_kw={"placeholder": "Логин"})
 
     password = PasswordField(validators=[
-                             InputRequired(), Length(min=5, max=20)], render_kw={"placeholder": "Password"})
+                             InputRequired(), Length(min=5, max=20)], render_kw={"placeholder": "Пароль"})
 
-    submit = SubmitField('Login')
+    submit = SubmitField('Войти')
 
 @app_routes.route('/')
 def home():

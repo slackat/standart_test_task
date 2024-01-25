@@ -8,12 +8,17 @@
     <title>Список заявок на оплату</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
 </head>
 
 <body>
-    <a href="/requisites" class="btn btn-primary requisites-btn">Перейти к странице с реквизитами</a>
     <h1>Список заявок на оплату</h1>
+    <div>
+        <a href="/requisites" class="btn btn-primary requisites-btn">Страница с реквизитами</a>
+    </div>
+    <div>
+        <a href="/" class="btn btn-primary mainpage-btn">Главная страница</a>
+    </div>
     <table>
         <tr>
             <th>ID заявки</th>

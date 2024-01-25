@@ -6,6 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Вход в систему</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='login.css') }}">
 </head>
 
 <body>
@@ -17,6 +18,8 @@
         {{ form.password }}
         {{ form.submit }}
     </form>
+    <a href="{{ url_for('app_routes.payment_requests') }}">Страница со списком заявок</a><br>
+    <a href="{{ url_for('app_routes.home') }}">Главная страница</a><br>
 </body>
 
 </html>

@@ -1,0 +1,18 @@
+body {
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+h1 {
+    margin-top: 50px;
+}
+
+a {
+    display: block;
+    margin-top: 20px;
+    color: #000000;
+}
+
+a:hover {
+    color: #000000b6;
+}

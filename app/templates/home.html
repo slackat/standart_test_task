@@ -6,13 +6,15 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Главная страница</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='home.css') }}">
 </head>
 
 <body>
     <h1>Главная страница</h1>
     <a href="{{ url_for('app_routes.login') }}">Войти в систему</a><br>
     <a href="{{ url_for('app_routes.payment_requests') }}">Перейти к таблице со всеми пользователями</a><br>
-    <a href="{{ url_for('app_routes.requisites') }}">Перейти к таблице с реквизитами пользователей (требуется авторизация)</a><br>
+    <a href="{{ url_for('app_routes.requisites') }}">Перейти к таблице с реквизитами пользователей (требуется
+        авторизация)</a><br>
 
 </body>
 

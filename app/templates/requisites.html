@@ -8,30 +8,36 @@
     <title>Список заявок на оплату</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
 </head>
 
 <body>
-    <a href="/" class="btn btn-primary mainpage-btn">Перейти к главной странице</a>
-    <a href="{{url_for('app_routes.logout')}}" class="btn btn-primary home-btn">Выйти из аккаунта</a>
     <h1>Список реквизитов</h1>
+    <a href="{{url_for('app_routes.logout')}}" class="btn btn-primary home-btn">Выйти из аккаунта</a>
+    <a href="/" class="btn btn-primary mainpage-btn">Главная страница</a>
 
-    <form id="searchForm">
-        <label for="search">Search:</label>
-        <input type="text" name="search" id="search" value="{{ search_term }}">
-
-        <label for="search_field">Поле для поиска:</label>
-        <select name="search_field" id="search_field">
-            <option value="payment_type">Тип оплаты</option>
-            <option value="account_type">Тип аккаунта</option>
-            <option value="owner_name">ФИО</option>
-            <option value="phone_number">Номер телефона</option>
-            <option value="value_limit">Лимит</option>
-        </select>
-
-        <button type="submit">Поиск</button>
-    </form>
-
+    <div class="searchForm">
+        <form id="searchForm">
+            <div class="search">
+                <label for="search" style="font-size: 16px;">Искать:</label>
+                <input type="text" name="search" id="search" value="{{ search_term }}">
+            </div>
+            <div>
+                <label for="search_field" style="font-size: 16px;">Поле для поиска:</label>      
+                <select name="search_field" id="search_field">
+                    <option value="payment_type">Тип оплаты</option>
+                    <option value="account_type">Тип аккаунта</option>
+                    <option value="owner_name">ФИО</option>
+                    <option value="phone_number">Номер телефона</option>
+                    <option value="value_limit">Лимит</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit">Поиск</button>
+            </div>
+        </form>
+    </div>
+        
     <table id="requisitesTable">
         <thead>
             <tr>
