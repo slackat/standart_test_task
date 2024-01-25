@@ -1,84 +1,26 @@
-/* styles.css */
 body {
-    background-color: #fff; /* белый цвет для фона */
+    background-color: rgb(255, 255, 255);
+    color: rgb(0, 0, 0);
+    font-size: 16px;
 }
 
-h1 {
-    color: #000000; /* синий цвет для заголовка */
+#requisitesTable th a,
+#paymentRequestsTable th a {
+    color: white;
 }
 
-table {
-    width: 100%;
-    border-collapse: collapse;
-    margin-top: 20px;
+#requisitesTable th,
+#paymentRequestsTable th {
+    background-color: black;
 }
 
-th, td {
-    border: 1px solid #dee2e6; /* цвет границы таблицы */
-    padding: 8px;
-    text-align: center;
+#searchForm label,
+#searchForm select {
+    color: rgb(0, 0, 0);
 }
 
-th {
-    background-color: #000000; /* синий цвет для заголовков столбцов */
-    color: #fff; /* белый цвет для текста в заголовках столбцов */
-}
-
-tr:nth-child(even) {
-    background-color: #f8f9fa; /* светло-синий цвет для четных строк */
-}
-
-.sort-link {
-    color: #ffffff;
-}
-
-a {
-    display: block;
-    margin-top: 10px;
-    color: #000000;
-}
-
-
-.btn-primary {
-    color: #000000;
-}
-
-.btn-primary:hover {
-    color: #000000b6;
-}
-
-button[type="submit"] {
+#requisitesTable th,
+#paymentRequestsTable th {
     background-color: black;
     color: white;
-    padding: 10px 20px;
-    font-size: 16px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.searchForm{
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-input[type="text"] {
-    font-size: 16px;
-    border: 2px solid black;
-    border-radius: 5px;
-    padding: 5px;
-}
-
-select {
-    font-size: 16px;
-    padding: 5px;
-}
-
-label {
-    font-size: 16px;
-    padding: 5px;
-}
-
-.search {
-    margin-bottom: 20px;
 }

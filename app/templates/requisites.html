@@ -6,62 +6,66 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Список заявок на оплату</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
-        integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     <link rel="stylesheet" href="{{ url_for('static', filename='styles/tables.css') }}">
 </head>
 
 <body>
-    <h1>Список реквизитов</h1>
-    <a href="{{url_for('app_routes.logout')}}" class="btn btn-primary home-btn">Выйти из аккаунта</a>
-    <a href="/" class="btn btn-primary mainpage-btn">Главная страница</a>
+    <div class="container">
+        <h1>Список реквизитов</h1>
+        <div class="d-flex justify-content-between mb-3">
+            <a href="/" class="btn btn-secondary">Главная страница</a>
+            <a href="{{url_for('app_routes.logout')}}" class="btn btn-secondary">Выйти из аккаунта</a>
+        </div>
 
-    <div class="searchForm">
-        <form id="searchForm">
-            <div class="search">
-                <label for="search" style="font-size: 16px;">Искать:</label>
-                <input type="text" name="search" id="search" value="{{ search_term }}">
-            </div>
-            <div>
-                <label for="search_field" style="font-size: 16px;">Поле для поиска:</label>      
-                <select name="search_field" id="search_field">
-                    <option value="payment_type">Тип платежа</option>
-                    <option value="account_type">Тип аккаунта</option>
-                    <option value="owner_name">ФИО</option>
-                    <option value="phone_number">Номер телефона</option>
-                    <option value="value_limit">Лимит</option>
-                </select>
-            </div>
-            <div>
-                <button type="submit">Поиск</button>
+        <form id="searchForm" class="mb-3">
+            <div class="form-row">
+                <div class="col">
+                    <label for="search">Искать:</label>
+                    <input type="text" name="search" id="search" value="{{ search_term }}" class="form-control">
+                </div>
+                <div class="col">
+                    <label for="search_field">Поле для поиска:</label>
+                    <select name="search_field" id="search_field" class="form-control">
+                        <option value="payment_type">Тип платежа</option>
+                        <option value="account_type">Тип аккаунта</option>
+                        <option value="owner_name">ФИО</option>
+                        <option value="phone_number">Номер телефона</option>
+                        <option value="value_limit">Лимит</option>
+                    </select>
+                </div>
+                <div class="col mt-auto">
+                    <button type="submit" class="btn btn-secondary">Поиск</button>
+                </div>
             </div>
         </form>
+
+        <table id="requisitesTable" class="table table-bordered">
+            <thead>
+                <tr>
+                    <th><a href="#" class="sort-link" data-sort="id">ID</a></th>
+                    <th><a href="#" class="sort-link" data-sort="payment_type">Тип платежа</a></th>
+                    <th><a href="#" class="sort-link" data-sort="account_type">Тип аккаунта</a></th>
+                    <th><a href="#" class="sort-link" data-sort="owner_name">ФИО</a></th>
+                    <th><a href="#" class="sort-link" data-sort="phone_number">Номер телефона</a></th>
+                    <th><a href="#" class="sort-link" data-sort="value_limit">Лимит</a></th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for requisite in requisites %}
+                <tr>
+                    <td>{{ requisite.id }}</td>
+                    <td>{{ requisite.payment_type }}</td>
+                    <td>{{ requisite.account_type }}</td>
+                    <td>{{ requisite.owner_name }}</td>
+                    <td>{{ requisite.phone_number }}</td>
+                    <td>{{ requisite.value_limit }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
     </div>
-        
-    <table id="requisitesTable">
-        <thead>
-            <tr>
-                <th><a href="#" class="sort-link" data-sort="id">ID</a></th>
-                <th><a href="#" class="sort-link" data-sort="payment_type">Тип платежа</a></th>
-                <th><a href="#" class="sort-link" data-sort="account_type">Тип аккаунта</a></th>
-                <th><a href="#" class="sort-link" data-sort="owner_name">ФИО</a></th>
-                <th><a href="#" class="sort-link" data-sort="phone_number">Номер телефона</a></th>
-                <th><a href="#" class="sort-link" data-sort="value_limit">Лимит</a></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for requisite in requisites %}
-            <tr>
-                <td>{{ requisite.id }}</td>
-                <td>{{ requisite.payment_type }}</td>
-                <td>{{ requisite.account_type }}</td>
-                <td>{{ requisite.owner_name }}</td>
-                <td>{{ requisite.phone_number }}</td>
-                <td>{{ requisite.value_limit }}</td>
-            </tr>
-            {% endfor %}
-        </tbody>
-    </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{ url_for('static', filename='scripts/table_search_and_sort.js') }}"></script>
