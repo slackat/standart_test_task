@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request
+from flask import Blueprint, jsonify, render_template, request
 from sqlalchemy import or_
 from models import PaymentRequests, Requisites
 from utils import db
@@ -33,9 +33,14 @@ def payment_requests():
 
 @app_routes.route('/requisites')
 def requisites():
+    requisites = Requisites.query.all()
+    return render_template('requisites.html', requisites=requisites)
+
+
+@app_routes.route('/get_requisites')
+def get_requisites():
     column_to_sort = request.args.get('sort', 'id')
     order_by = request.args.get('order', 'asc')
-
     search_term = request.args.get('search', '')
     search_field = request.args.get('search_field', 'payment_type')
 
@@ -44,13 +49,19 @@ def requisites():
         'account_type': Requisites.account_type,
         'owner_name': Requisites.owner_name,
         'phone_number': Requisites.phone_number,
-        'limit': Requisites.value_limit,
+        'value_limit': Requisites.value_limit,
     }
 
     if search_field not in field_mapping:
-        return render_template('requisites.html')
+        return jsonify([])
 
     filters = [field_mapping[search_field].ilike(f'%{search_term}%')]
-    requisites = Requisites.query.filter(or_(*filters)).order_by(db.text(f"{column_to_sort} {order_by}")).all()
+    requisites = Requisites.query.filter(
+        or_(*filters)).order_by(db.text(f"{column_to_sort} {order_by}")).all()
 
-    return render_template('requisites.html', requisites=requisites, column_to_sort=column_to_sort, order_by=order_by, search_term=search_term)
+    requisites_data = [{'id': req.id, 'payment_type': req.payment_type, 'account_type': req.account_type,
+                        'owner_name': req.owner_name, 'phone_number': req.phone_number, 'value_limit': req.value_limit}
+                       for req in requisites]
+
+    print(requisites_data)
+    return jsonify(requisites_data)
