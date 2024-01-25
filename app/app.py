@@ -1,4 +1,4 @@
-from utils import app
+from utils import app, swaggerui_blueprint, SWAGGER_URL
 from utils.seed import seed_database
 from routes import app_routes
 from api.invoices import invoices_bp
@@ -9,4 +9,5 @@ if __name__ == '__main__':
         seed_database()
     app.register_blueprint(app_routes)
     app.register_blueprint(invoices_bp)
+    app.register_blueprint(swaggerui_blueprint, url_prefix=SWAGGER_URL)
     app.run()

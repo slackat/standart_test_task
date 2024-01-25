@@ -1,0 +1,65 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "title": "Your API Documentation",
+        "description": "Documentation for your Flask API",
+        "version": "1.0.0"
+    },
+    "basePath": "/api",
+    "paths": {
+        "/create_invoice": {
+            "get": {
+                "summary": "Create an invoice",
+                "parameters": [
+                    {
+                        "name": "payment_type",
+                        "in": "query",
+                        "type": "string",
+                        "required": true,
+                        "description": "Type of payment"
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "type": "integer",
+                        "required": true,
+                        "description": "Limit value"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    }
+                }
+            }
+        },
+        "/get_invoice_status/{payment_id}": {
+            "get": {
+                "summary": "Get invoice status",
+                "parameters": [
+                    {
+                        "name": "payment_id",
+                        "in": "path",
+                        "type": "integer",
+                        "required": true,
+                        "description": "ID of the payment"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK"
+                    },
+                    "400": {
+                        "description": "Bad request"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    }
+}

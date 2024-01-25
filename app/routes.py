@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, render_template, request, url_for, redirect
+from flask import Blueprint, jsonify, render_template, request, send_file, url_for, redirect
 from sqlalchemy import or_
 from models import PaymentRequests, Requisites, User
 from utils import db, login_manager, bcrypt
@@ -107,3 +107,8 @@ def get_requisites():
                        for req in requisites]
 
     return jsonify(requisites_data)
+
+@app_routes.route('/static/swagger.json')
+def get_swagger_json():
+    swagger_file_path = '../swagger/swagger.json'
+    return send_file(swagger_file_path)

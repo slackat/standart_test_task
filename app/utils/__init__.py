@@ -8,11 +8,32 @@ from dotenv import load_dotenv
 import os
 from flask_login import LoginManager
 from flask_bcrypt import Bcrypt
+from flask_swagger_ui import get_swaggerui_blueprint
 
 app = Flask(__name__, template_folder='../templates', static_folder='../static')
 app.config['SECRET_KEY'] = 'secret_key'
 app.config['TESTING'] = False
 app.config['PERMANENT_SESSION_LIFETIME'] = 60*60*24*30
+
+
+
+
+SWAGGER_URL = '/api/docs'
+API_URL = '/static/swagger.json'
+
+swaggerui_blueprint = get_swaggerui_blueprint(
+    SWAGGER_URL,
+    API_URL,
+    config={
+        'app_name': "Your API Documentation"
+    }
+)
+
+
+
+
+
+
 
 load_dotenv()
 POSTGRES_LOGIN = os.getenv('POSTGRES_LOGIN')
