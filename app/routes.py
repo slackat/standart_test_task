@@ -95,12 +95,23 @@ def get_requisites():
         'value_limit': Requisites.value_limit,
     }
 
-    if search_field not in field_mapping:
-        return jsonify([])
+    if search_term:
+        # For integer columns
+        if search_field == 'value_limit':
+            try:
+                search_term = int(search_term)
+            except ValueError:
+                return jsonify([])
+            filters = [field_mapping[search_field] == search_term]
+        # For string columns
+        else:
+            filters = [field_mapping[search_field].ilike(f'%{search_term}%')]
 
-    filters = [field_mapping[search_field].ilike(f'%{search_term}%')]
-    requisites = Requisites.query.filter(
-        or_(*filters)).order_by(db.text(f"{column_to_sort} {order_by}")).all()
+        requisites = Requisites.query.filter(
+            or_(*filters)).order_by(db.text(f"{column_to_sort} {order_by}")).all()
+    else:
+        # In case empty search field for show all data
+        requisites = Requisites.query.all()
 
     requisites_data = [{'id': req.id, 'payment_type': req.payment_type, 'account_type': req.account_type,
                         'owner_name': req.owner_name, 'phone_number': req.phone_number, 'value_limit': req.value_limit}
