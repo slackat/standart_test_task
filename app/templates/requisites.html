@@ -8,7 +8,7 @@
     <title>Список заявок на оплату</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
         integrity="sha384-B4gt1jrGC7Jh4AgTPSdUtOBvfO8sh+WyIxjSM6tFZv3voU5/DX4E63Lk5t2FExp5" crossorigin="anonymous">
-    <link rel="stylesheet" href="{{ url_for('static', filename='tables.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles/tables.css') }}">
 </head>
 
 <body>
@@ -25,7 +25,7 @@
             <div>
                 <label for="search_field" style="font-size: 16px;">Поле для поиска:</label>      
                 <select name="search_field" id="search_field">
-                    <option value="payment_type">Тип оплаты</option>
+                    <option value="payment_type">Тип платежа</option>
                     <option value="account_type">Тип аккаунта</option>
                     <option value="owner_name">ФИО</option>
                     <option value="phone_number">Номер телефона</option>
@@ -64,70 +64,7 @@
     </table>
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script>
-        $(document).ready(function () {
-            $('#searchForm').submit(function (e) {
-                e.preventDefault();
-                let formData = $(this).serialize();
-                $.ajax({
-                    type: 'GET',
-                    url: '/get_requisites',
-                    data: formData,
-                    dataType: 'json',
-                    success: function (data) {
-                        updateTable(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            });
-
-            $('.sort-link').click(function (e) {
-                e.preventDefault();
-                let column_to_sort = $(this).data('sort');
-                let order_by = 'asc';
-                if ($(this).hasClass('desc')) {
-                    order_by = 'asc';
-                    $(this).removeClass('desc');
-                } else {
-                    order_by = 'desc';
-                    $(this).addClass('desc');
-                }
-                $.ajax({
-                    type: 'GET',
-                    url: '/get_requisites',
-                    data: {
-                        sort: column_to_sort,
-                        order: order_by,
-                        search: $('#search').val(),
-                        search_field: $('#search_field').val()
-                    },
-                    dataType: 'json',
-                    success: function (data) {
-                        updateTable(data);
-                    },
-                    error: function (xhr, status, error) {
-                        console.error(error);
-                    }
-                });
-            });
-
-            function updateTable(data) {
-                $('#requisitesTable tbody').empty();
-                $.each(data, function (index, requisite) {
-                    $('#requisitesTable tbody').append('<tr>' +
-                        '<td>' + requisite.id + '</td>' +
-                        '<td>' + requisite.payment_type + '</td>' +
-                        '<td>' + requisite.account_type + '</td>' +
-                        '<td>' + requisite.owner_name + '</td>' +
-                        '<td>' + requisite.phone_number + '</td>' +
-                        '<td>' + requisite.value_limit + '</td>' +
-                        '</tr>');
-                });
-            }
-        });
-    </script>
+    <script src="{{ url_for('static', filename='scripts/table_search_and_sort.js') }}"></script>
 </body>
 
 </html>
